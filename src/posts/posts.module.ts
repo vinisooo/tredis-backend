@@ -1,8 +1,9 @@
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { PostsController } from './posts.controller';
 import { PostRepository } from './repositories/posts.repository';
 import { PrismaPostRepository } from './repositories/prisma/posts-prisma.repository';
+import { EnsurePostExistsMiddleware } from './middlewares/ensure-post-exists.middleware';
 
 @Module({
   controllers: [PostsController],
@@ -14,4 +15,10 @@ import { PrismaPostRepository } from './repositories/prisma/posts-prisma.reposit
     }
   ]
 })
-export class PostsModule {}
+export class PostsModule {
+  configure(consumer: MiddlewareConsumer){
+    consumer.apply(
+      EnsurePostExistsMiddleware
+    ).forRoutes("/posts/:id*")
+  }
+}
