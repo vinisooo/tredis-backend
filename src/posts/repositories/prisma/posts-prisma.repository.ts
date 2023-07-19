@@ -16,17 +16,26 @@ export class PrismaPostRepository extends PostRepository{
         
         return plainToInstance(Post, post)
     }
+
     async findAll() {
         const posts = await prisma.post.findMany();
 
         return plainToInstance(Post, posts)
     }
+
     async findOne(id: number) {
         const post = await prisma.post.findUnique({where: {id}});
+        
         return post
     }
+
     async update(id: number, data: UpdatePostDto) {
         const post = await prisma.post.update({where: {id}, data});
+
         return post;
+    }
+
+    async remove(id: number) {
+        await prisma.post.delete({where: {id}});
     }
 }

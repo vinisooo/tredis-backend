@@ -7,4 +7,5 @@ export abstract class PostRepository {
     abstract findAll(): Promise<Post[]> | Post;
     abstract findOne(id: number): Promise<Post> | Post;
     abstract update(id: number, data: UpdatePostDto): Promise<Post>| Post;
+    abstract remove(id: number): Promise<void> | void;
 }
