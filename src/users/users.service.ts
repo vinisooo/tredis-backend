@@ -7,8 +7,8 @@ import { UserRepository } from './repositories/user.repository';
 export class UsersService {
   constructor(private readonly userRepository: UserRepository) {}
 
-  create(createUserDto: CreateUserDto) {
-    const user = this.userRepository.create(createUserDto);
+  async create(createUserDto: CreateUserDto) {
+    const user = await this.userRepository.create(createUserDto);
     return user
   }
 
@@ -18,6 +18,10 @@ export class UsersService {
 
   findOne(id: number) {
     return `This action returns a #${id} user`;
+  }
+
+  findByEmail(email: string) {
+    return this.userRepository.findByEmail(email);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
