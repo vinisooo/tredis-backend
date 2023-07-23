@@ -5,5 +5,5 @@ export class Post {
     content: string;
     imageUrl: string | null;
 
-    user: User;
+    user: User
 }
