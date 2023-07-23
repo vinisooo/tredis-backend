@@ -7,8 +7,8 @@ import { PostRepository } from './repositories/posts.repository';
 export class PostsService {
   constructor(private postRepository: PostRepository) {}
   
-  async create(createPostDto: CreatePostDto) {
-    const post = this.postRepository.create(createPostDto);
+  async create(createPostDto: CreatePostDto, userId: number) {
+    const post = this.postRepository.create(createPostDto, userId);
     return post;
   }
 
