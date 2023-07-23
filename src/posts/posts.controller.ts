@@ -3,6 +3,7 @@ import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { PostOwnerGuard } from './guards/post-owner.guard';
 
 @Controller('posts')
 export class PostsController {
@@ -25,12 +26,14 @@ export class PostsController {
   }
 
   @Patch(':id')
+  @UseGuards(JwtAuthGuard, PostOwnerGuard)
   update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
     return this.postsService.update(+id, updatePostDto);
   }
 
   @Delete(':id')
   @HttpCode(204)
+  @UseGuards(JwtAuthGuard, PostOwnerGuard)
   remove(@Param('id') id: string) {
     return this.postsService.remove(+id);
   }
