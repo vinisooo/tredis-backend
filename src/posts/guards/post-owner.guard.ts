@@ -1,5 +1,4 @@
 import { Injectable, CanActivate, ExecutionContext } from "@nestjs/common";
-import { UsersService } from "src/users/users.service";
 import { PostsService } from "../posts.service";
 
 
